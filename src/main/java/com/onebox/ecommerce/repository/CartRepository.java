@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CartRepository {
-    private Map<String, Cart> carts = new ConcurrentHashMap<>();
+    private final Map<String, Cart> carts = new ConcurrentHashMap<>();
 
     public Cart getCartById(String cartId) {
         return carts.get(cartId);
