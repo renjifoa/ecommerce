@@ -6,7 +6,7 @@ import lombok.Getter;
 public class Product {
     private final Long id;
     private final String description;
-    private int amount;
+    private final int amount;
 
     public Product(Long id, String description, int amount) {
         this.id = id;
