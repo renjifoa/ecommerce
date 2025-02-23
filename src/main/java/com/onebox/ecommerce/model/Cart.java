@@ -4,32 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 @Setter
 public class Cart {
-    private final String id;
-    private final List<Product> products;
+    private static Long counter = 0L;
+
+    private final Long id;
+    private Map<Long, Product> products;
     private LocalDateTime  lastUpdated;
 
-    public Cart(String id) {
-        this.id = id;
-        this.products = new ArrayList<>();
+    public Cart() {
+        this.id = ++counter;
+        this.products = new HashMap<>();
         this.lastUpdated = LocalDateTime.now();
-    }
-
-
-    public void addProduct(Product product) {
-        products.add(product);
-        updateTimestamp();
-    }
-
-
-    public void deleteProduct(Product product) {
-        products.remove(product);
-        updateTimestamp();
     }
 
     public void updateTimestamp() {
