@@ -28,7 +28,6 @@ class UpdateCartControllerIntegrationTest {
 
     private static final String CART_ID_URI = "/cart/{cartId}";
 
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -81,7 +80,7 @@ class UpdateCartControllerIntegrationTest {
 
         mockMvc.perform(put(CART_ID_URI, cart.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(getProductsJson()))
+                        .content(objectMapper.writeValueAsString(List.of(firstProduct, updatedProduct))))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(cart.getId()))
                 .andExpect(jsonPath("$.products.1.id").value(firstProduct.getId()))
@@ -91,22 +90,5 @@ class UpdateCartControllerIntegrationTest {
                 .andExpect(jsonPath("$.products.2.description").value(secondProduct.getDescription()))
                 .andExpect(jsonPath("$.products.2.amount").value(updatedProduct.getAmount()))
                 .andExpect(jsonPath("$.lastUpdated").exists());
-    }
-
-    private String getProductsJson() {
-        return """
-           [
-               {
-                   "id": 1,
-                   "description": "Product A",
-                   "amount": 5
-               },
-               {
-                   "id": 2,
-                   "description": "Product B",
-                   "amount": 7
-               }
-           ]
-           """;
     }
 }
