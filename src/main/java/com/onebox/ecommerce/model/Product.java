@@ -9,6 +9,7 @@ public class Product {
     private final Long id;
     private final String description;
     @NotNull
+    @Min(0)
     private final Integer amount;
 
     public Product(Long id, String description, Integer amount) {
