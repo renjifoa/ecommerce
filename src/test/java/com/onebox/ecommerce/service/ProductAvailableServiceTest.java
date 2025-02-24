@@ -37,9 +37,7 @@ class ProductAvailableServiceTest {
         ProductAvailable productAvailable = new ProductAvailable(1L, "Apple", 0);
 
         when(productRepository.getProductById(productDTO.getId())).thenReturn(productAvailable);
-        assertThrows(OutOfStockException.class, () -> {
-            productService.getProductCheckingTheStock(productDTO);
-        });
+        assertThrows(OutOfStockException.class, () -> productService.getProductCheckingTheStock(productDTO));
     }
 
     @Test
@@ -49,8 +47,6 @@ class ProductAvailableServiceTest {
         ProductAvailable productAvailable = new ProductAvailable(1L, "Apple", 2);
 
         when(productRepository.getProductById(productDTO.getId())).thenReturn(productAvailable);
-        assertThrows(OutOfStockException.class, () -> {
-            productService.getProductCheckingTheStock(productDTO);
-        });
+        assertThrows(OutOfStockException.class, () -> productService.getProductCheckingTheStock(productDTO));
     }
 }
