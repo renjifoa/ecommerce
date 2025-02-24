@@ -81,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n  {\r\n    \"id\": \"1\",\r\n    \"description\": \"Math book\",\r\n    \"amount\": \"5\"\r\n  },\r\n  {\r\n    \"id\": \"2\",\r\n    \"description\": \"Science book\",\r\n    \"amount\": \"3\"\r\n  }\r\n]\r\n\r\n",
+							"raw": "[\r\n  {\r\n    \"id\": 1,\r\n    \"amount\": 5\r\n  },\r\n  {\r\n    \"id\": 2,\r\n    \"amount\": 7\r\n  }\r\n]\r\n\r\n\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -122,6 +122,47 @@
 							],
 							"path": [
 								"{{cart_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Product - Retrieve products available",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}products",
+							"host": [
+								"{{host}}products"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
 							]
 						}
 					},
