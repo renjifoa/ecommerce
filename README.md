@@ -32,12 +32,23 @@ Run the following command in the project's root directory:
 ```sh
   mvn spring-boot:run
 ```
-The API will be available at: ```http://localhost:8080/cart```
+The cart API will be available at: ```http://localhost:8080/cart```
+
+The product available API will be available at: ```http://localhost:8080/products```
 
 ---
+## API Documentation with Swagger
+The API includes Swagger documentation.
 
+Open Swagger UI after running the application: ```http://localhost:8080/swagger-ui/index.html```
+
+---
 ## API Usage
 ### API Endpoints
+
+You can use swagger or Postman to send the request.
+In the directory ```docs/postman``` you can find the collection and environment used for Postman.
+
 | Method | Endpoint     | Description                   | Example body                                    |
 |--------|--------------|-------------------------------|-------------------------------------------------|
 | POST   | `/cart`      | Create a cart                 | Empty                                           |
@@ -45,7 +56,6 @@ The API will be available at: ```http://localhost:8080/cart```
 | PUT    | `/cart/{id}` | Update products from the cart | `[{"id": 1,"amount": 5},{"id": 2,"amount": 7}]` |
 | DELETE | `/cart/{id}` | Delete a cart                 | Empty                                           |
 | GET    | `/products`  | Retrieve available products   | Empty                                           |
-
 
 ---
 ## Testing and Code Coverage
@@ -61,15 +71,6 @@ The API will be available at: ```http://localhost:8080/cart```
 The report will be located at: ```target/site/jacoco/index.html```
 
 ---
-## API Documentation with Swagger
-The API includes Swagger documentation.
-
-Open Swagger UI after running the application:
-```sh
-  http://localhost:8080/swagger-ui/index.html
-```
----
-
 ## Project Structure
 ```
 ecommerce
@@ -81,11 +82,14 @@ ecommerce
 │   ├── model           # Entities and data models
 │   ├── repository      # Data access layer
 │   ├── service         # Business logic
+|
 ├── src/main/resources
 │   ├── checkstyle      # Code style configuration
+|
 ├── src/test/java/com/onebox/ecommerce
 │   ├── controller      # Controller tests
 │   ├── service         # Service tests
+|
 ├── docs/postman        # postman collection and environment
 ├── pom.xml             # Maven configuration
 └── README.md           # Project documentation
