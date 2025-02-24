@@ -9,7 +9,7 @@ It allows shopping cart management with the following features:
 - Add products to a cart
 - Retrieve cart information
 - Delete carts manually or automatically after 10 minutes of inactivity
-- No database implementation, in-memory storage
+- No database implementation, in-memory storage with predefined products
 - Code coverage with JaCoCo
 - Review code style with CheckStyle
 - API documentation with Swagger
@@ -56,6 +56,21 @@ In the directory ```docs/postman``` you can find the collection and environment 
 | PUT    | `/cart/{id}` | Update products from the cart | `[{"id": 1,"amount": 5},{"id": 2,"amount": 7}]` |
 | DELETE | `/cart/{id}` | Delete a cart                 | Empty                                           |
 | GET    | `/products`  | Retrieve available products   | Empty                                           |
+
+Predefined products:
+
+| ID  | Description | Stock |
+|-----|-------------|-------|
+| 1   | Apple       | 100   |
+| 2   | Banana      | 200   |
+| 3   | Cherry      | 300   |
+| 4   | Date        | 400   |
+| 5   | Grape       | 500   |
+| 6   | Kiwi        | 600   |
+| 7   | Lemon       | 700   |
+| 8   | Mango       | 800   |
+| 9   | Orange      | 900   |
+| 10  | Pear        | 1000  |
 
 ---
 ## Testing and Code Coverage

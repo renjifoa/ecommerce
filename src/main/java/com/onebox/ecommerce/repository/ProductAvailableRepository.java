@@ -79,7 +79,7 @@ public class ProductAvailableRepository {
 
     /**
      * Initializes the in-memory product list with predefined products.
-     * This method assigns a unique ID to each product and sets the initial stock to 50.
+     * This method assigns a unique ID to each product and sets the initial stock.
      */
     private void initProducts() {
         List<String> productNames = List.of("Apple", "Banana", "Orange", "Mango", "Pineapple",
