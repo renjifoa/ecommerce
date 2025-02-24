@@ -25,9 +25,7 @@ import java.util.List;
 
 /**
  * REST controller for managing shopping carts.
- *
  * This controller provides endpoints for creating, retrieving, updating and deleting a cart by its ID.
- *
  * It leverages the {@link CartService} for business logic and uses Swagger annotations
  * to document its endpoints.
  */

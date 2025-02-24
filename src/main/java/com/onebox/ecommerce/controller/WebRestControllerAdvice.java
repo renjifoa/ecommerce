@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Global exception handler for REST controllers.
- *
  * This class provides a centralized mechanism for handling exceptions thrown
  * by the controllers in the e-commerce application. It specifically handles
  * IllegalArgumentException and returns a structured error response with a

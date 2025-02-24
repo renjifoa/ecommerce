@@ -13,7 +13,6 @@ import java.util.Map;
 
 /**
  * Repository class that handles operations related to carts in the e-commerce system.
- *
  * This class manages cart data without using a database, utilizing an in-memory storage
  * mechanism (a Map of carts). It supports creating, updating, retrieving, and deleting
  * carts and products within them, as well as automatically removing inactive carts

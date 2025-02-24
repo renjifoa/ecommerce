@@ -6,7 +6,6 @@ import lombok.Getter;
 
 /**
  * Data Transfer Object (DTO) for representing a product in the e-commerce system.
- *
  * This class is used to transfer product data from the request that only contains
  * the product's unique identifier (ID) and the amount requested by the user.
  */
