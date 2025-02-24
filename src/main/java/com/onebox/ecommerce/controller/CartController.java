@@ -1,7 +1,8 @@
 package com.onebox.ecommerce.controller;
 
+import com.onebox.ecommerce.dto.ProductDto;
+import com.onebox.ecommerce.exception.WebRestControllerAdvice;
 import com.onebox.ecommerce.model.Cart;
-import com.onebox.ecommerce.model.Product;
 import com.onebox.ecommerce.service.CartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,9 +26,7 @@ import java.util.List;
 
 /**
  * REST controller for managing shopping carts.
- *
  * This controller provides endpoints for creating, retrieving, updating and deleting a cart by its ID.
- *
  * It leverages the {@link CartService} for business logic and uses Swagger annotations
  * to document its endpoints.
  */
@@ -108,7 +107,7 @@ public class CartController {
     })
     @PutMapping("/{cartId}")
     public ResponseEntity<Cart> updateProductsFromCart(@PathVariable Long cartId,
-                                                       @Valid @RequestBody List<Product> products) {
+                                                       @Valid @RequestBody List<ProductDto> products) {
         Cart cart =  cartService.updateProductsFromCart(cartId, products);
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }

@@ -6,10 +6,8 @@ import lombok.Getter;
 
 /**
  * Represents a product in the e-commerce system.
- *
  * A product is uniquely identified by its id and contains a description
  * along with an amount. I assume that is not necessary having a list of existing products since there isn't a database.
- *
  * Validation annotations ensure that the id and amount fields are not null.
  */
 @Getter

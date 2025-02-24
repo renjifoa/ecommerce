@@ -1,4 +1,4 @@
-package com.onebox.ecommerce.controller;
+package com.onebox.ecommerce.exception;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Global exception handler for REST controllers.
- *
  * This class provides a centralized mechanism for handling exceptions thrown
  * by the controllers in the e-commerce application. It specifically handles
  * IllegalArgumentException and returns a structured error response with a
@@ -28,6 +27,12 @@ public class WebRestControllerAdvice {
     public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException ex) {
         ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(OutOfStockException.class)
+    public ResponseEntity<ErrorResponse> handleOutOfStockException(OutOfStockException ex) {
+        ErrorResponse errorResponse = new ErrorResponse(ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 
     /**

@@ -9,7 +9,6 @@ import java.util.Map;
 
 /**
  * Represents a shopping cart in the e-commerce system.
- *
  * Each cart has a unique id, maintains a collection of products, and tracks the last time
  * it was updated. The cart is initialized with an empty product collection and the timestamp
  * of its creation.

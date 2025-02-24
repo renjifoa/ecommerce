@@ -32,18 +32,30 @@ Run the following command in the project's root directory:
 ```sh
   mvn spring-boot:run
 ```
-The API will be available at: 
-`http://localhost:8080/cart`
----
+The cart API will be available at: ```http://localhost:8080/cart```
 
+The product available API will be available at: ```http://localhost:8080/products```
+
+---
+## API Documentation with Swagger
+The API includes Swagger documentation.
+
+Open Swagger UI after running the application: ```http://localhost:8080/swagger-ui/index.html```
+
+---
 ## API Usage
 ### API Endpoints
-| Method | Endpoint | Description |
-|--------|---------|-------------|
-| POST   | `/cart` | Create a cart |
-| POST   | `/cart/{id}/product` | Add a product to a cart |
-| GET    | `/cart/{id}` | Retrieve cart information |
-| DELETE | `/cart/{id}` | Delete a cart |
+
+You can use swagger or Postman to send the request.
+In the directory ```docs/postman``` you can find the collection and environment used for Postman.
+
+| Method | Endpoint     | Description                   | Example body                                    |
+|--------|--------------|-------------------------------|-------------------------------------------------|
+| POST   | `/cart`      | Create a cart                 | Empty                                           |
+| GET    | `/cart/{id}` | Retrieve cart information     | Empty                                           |
+| PUT    | `/cart/{id}` | Update products from the cart | `[{"id": 1,"amount": 5},{"id": 2,"amount": 7}]` |
+| DELETE | `/cart/{id}` | Delete a cart                 | Empty                                           |
+| GET    | `/products`  | Retrieve available products   | Empty                                           |
 
 ---
 ## Testing and Code Coverage
@@ -56,32 +68,28 @@ The API will be available at:
 ```sh
   mvn jacoco:report
 ```
-The report will be located at:
-`target/site/jacoco/index.html`
----
-## API Documentation with Swagger
-The API includes Swagger documentation.
+The report will be located at: ```target/site/jacoco/index.html```
 
-Open Swagger UI after running the application:
-```sh
-  http://localhost:8080/swagger-ui/index.html
-```
 ---
-
 ## Project Structure
 ```
 ecommerce
 ├── .github/workflows   #Pipeline configuration
 ├── src/main/java/com/onebox/ecommerce
 │   ├── controller      # Handles HTTP requests
+│   ├── dto             # Data transfer objects for request/response
+│   ├── exception       # Custom exceptions and exception handling
 │   ├── model           # Entities and data models
 │   ├── repository      # Data access layer
 │   ├── service         # Business logic
+|
 ├── src/main/resources
 │   ├── checkstyle      # Code style configuration
+|
 ├── src/test/java/com/onebox/ecommerce
 │   ├── controller      # Controller tests
 │   ├── service         # Service tests
+|
 ├── docs/postman        # postman collection and environment
 ├── pom.xml             # Maven configuration
 └── README.md           # Project documentation
