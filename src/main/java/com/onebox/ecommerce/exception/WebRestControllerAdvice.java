@@ -1,6 +1,5 @@
-package com.onebox.ecommerce.controller;
+package com.onebox.ecommerce.exception;
 
-import com.onebox.ecommerce.exception.OutOfStockException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
