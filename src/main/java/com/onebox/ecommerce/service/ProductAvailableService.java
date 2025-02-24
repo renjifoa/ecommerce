@@ -13,7 +13,6 @@ import java.util.List;
 
 /**
  * Service class for managing available products in the e-commerce system.
- *
  * This class provides methods for retrieving available products from the
  * repository. The repository uses an in-memory data structure, a Map
  * to store and manage the products.
@@ -44,7 +43,6 @@ public class ProductAvailableService {
 
     /**
      * Retrieves all available products.
-     *
      * This method fetches a list of all products currently available in the system.
      *
      * @return a list of all available products
