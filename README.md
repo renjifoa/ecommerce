@@ -38,12 +38,14 @@ The API will be available at:
 
 ## API Usage
 ### API Endpoints
-| Method | Endpoint | Description |
-|--------|---------|-------------|
-| POST   | `/cart` | Create a cart |
-| POST   | `/cart/{id}/product` | Add a product to a cart |
-| GET    | `/cart/{id}` | Retrieve cart information |
-| DELETE | `/cart/{id}` | Delete a cart |
+| Method | Endpoint     | Description                   | Example body                                    |
+|--------|--------------|-------------------------------|-------------------------------------------------|
+| POST   | `/cart`      | Create a cart                 | Empty                                           |
+| GET    | `/cart/{id}` | Retrieve cart information     | Empty                                           |
+| PUT    | `/cart/{id}` | Update products from the cart | `[{"id": 1,"amount": 5},{"id": 2,"amount": 7}]` |
+| DELETE | `/cart/{id}` | Delete a cart                 | Empty                                           |
+| GET    | `/products`  | Retrieve available products   | Empty                                           |
+
 
 ---
 ## Testing and Code Coverage
@@ -74,6 +76,8 @@ ecommerce
 ├── .github/workflows   #Pipeline configuration
 ├── src/main/java/com/onebox/ecommerce
 │   ├── controller      # Handles HTTP requests
+│   ├── dto             # Data transfer objects for request/response
+│   ├── exception      # Custom exceptions and exception handling
 │   ├── model           # Entities and data models
 │   ├── repository      # Data access layer
 │   ├── service         # Business logic
