@@ -1,7 +1,7 @@
 package com.onebox.ecommerce.controller;
 
+import com.onebox.ecommerce.dto.ProductDto;
 import com.onebox.ecommerce.model.Cart;
-import com.onebox.ecommerce.model.Product;
 import com.onebox.ecommerce.service.CartService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -106,7 +106,7 @@ public class CartController {
     })
     @PutMapping("/{cartId}")
     public ResponseEntity<Cart> updateProductsFromCart(@PathVariable Long cartId,
-                                                       @Valid @RequestBody List<Product> products) {
+                                                       @Valid @RequestBody List<ProductDto> products) {
         Cart cart =  cartService.updateProductsFromCart(cartId, products);
         return new ResponseEntity<>(cart, HttpStatus.OK);
     }

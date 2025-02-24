@@ -1,8 +1,10 @@
 package com.onebox.ecommerce.service;
 
+import com.onebox.ecommerce.dto.ProductDto;
 import com.onebox.ecommerce.model.Cart;
 import com.onebox.ecommerce.model.Product;
 import com.onebox.ecommerce.repository.CartRepository;
+import com.onebox.ecommerce.repository.ProductAvailableRepository;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 class CartServiceIntegrationTest {
     private static final Long PRODUCT_ID = 1L;
-    private static final String PRODUCT_DESC = "Product A";
+    private static final String PRODUCT_DESC = "Apple";
 
     private CartService cartService;
 
@@ -27,7 +29,9 @@ class CartServiceIntegrationTest {
     @BeforeEach
     void setUp() {
         CartRepository cartRepository = new CartRepository();
-        cartService = new CartService(cartRepository);
+        ProductAvailableRepository productAvailableRepository = new ProductAvailableRepository();
+        ProductAvailableService productAvailableService = new ProductAvailableService(productAvailableRepository);
+        cartService = new CartService(cartRepository, productAvailableService);
 
         cart = cartService.createCart();
         cartId = cart.getId();
@@ -67,7 +71,7 @@ class CartServiceIntegrationTest {
     void should_UpdateProductToCart_When_IsCalled() {
         cartService.updateProductsFromCart(cartId, getListOfProducts());
 
-        List<Product> productsToUpdate = List.of(new Product(PRODUCT_ID, PRODUCT_DESC, 5));
+        List<ProductDto> productsToUpdate = List.of(new ProductDto(PRODUCT_ID, 5));
         cartService.updateProductsFromCart(cartId, productsToUpdate);
 
         Map<Long, Product> actualProducts = cartService.getCartById(cartId).getProducts();
@@ -87,7 +91,7 @@ class CartServiceIntegrationTest {
     void should_DeleteProductFromCart_When_IsCalled() {
         cartService.updateProductsFromCart(cartId, getListOfProducts());
 
-        List<Product> productsToUpdate = List.of(new Product(PRODUCT_ID, PRODUCT_DESC, 0));
+        List<ProductDto> productsToUpdate = List.of(new ProductDto(PRODUCT_ID, 0));
         cartService.updateProductsFromCart(cartId, productsToUpdate);
 
         assertThat(cartService.getCartById(cartId).getProducts()).as("Should be empty").isEqualTo(Map.of());
@@ -99,7 +103,7 @@ class CartServiceIntegrationTest {
         cartService.updateProductsFromCart(cartId, getListOfProducts());
         cart.setLastUpdated(LocalDateTime.now().minusMinutes(7));
 
-        List<Product> productsToUpdate = List.of(new Product(PRODUCT_ID, PRODUCT_DESC, 5));
+        List<ProductDto> productsToUpdate = List.of(new ProductDto(PRODUCT_ID, 5));
         cartService.updateProductsFromCart(cartId, productsToUpdate);
 
         SoftAssertions softAssertions = new SoftAssertions();
@@ -138,7 +142,7 @@ class CartServiceIntegrationTest {
         softAssertions.assertAll();
     }
 
-    private List<Product> getListOfProducts() {
-        return List.of(new Product(PRODUCT_ID, PRODUCT_DESC, 2));
+    private List<ProductDto> getListOfProducts() {
+        return List.of(new ProductDto(PRODUCT_ID, 2));
     }
 }

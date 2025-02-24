@@ -1,7 +1,9 @@
 package com.onebox.ecommerce.service;
 
+import com.onebox.ecommerce.dto.ProductDto;
 import com.onebox.ecommerce.model.Cart;
 import com.onebox.ecommerce.model.Product;
+import com.onebox.ecommerce.model.ProductAvailable;
 import com.onebox.ecommerce.repository.CartRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +14,6 @@ import java.util.List;
 
 /**
  * Service class for managing shopping carts in the e-commerce system.
- *
  * This class provides methods to create, retrieve, update, and delete carts,
  * as well as a scheduled task to remove inactive carts. It interacts with the
  * CartRepository to perform all data operations.
@@ -36,12 +37,19 @@ public class CartService {
     private final CartRepository cartRepository;
 
     /**
-     * Constructs a new CartService with the specified CartRepository.
+     * The service that manages the product availability.
+     */
+    private final ProductAvailableService productAvailableService;
+
+    /**
+     * Constructs a new CartService with the specified CartRepository and ProductAvailableService.
      *
      * @param cartRepository the repository to use for managing carts
+     * @param productAvailableService the service to use for retrieving product availability
      */
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, ProductAvailableService productAvailableService) {
         this.cartRepository = cartRepository;
+        this.productAvailableService = productAvailableService;
     }
 
     /**
@@ -68,20 +76,26 @@ public class CartService {
 
     /**
      * Updates the products in a cart.
-     *
      * This method updates the products of the cart by iterating through the provided list
-     * and delegating the update operation to the CartRepository. The updated cart is then saved.
+     * of ProductDto objects and converting them into Product entities. The updated cart is then saved.
+     * Products are added to the cart only if the available stock is sufficient.
      *
      * @param cartId   the id of the cart to update
-     * @param products the list of products to update in the cart
+     * @param products the list of ProductDto objects to update in the cart
      * @return the updated Cart
      */
-    public Cart updateProductsFromCart(Long cartId, List<Product> products) {
+    public Cart updateProductsFromCart(Long cartId, List<ProductDto> products) {
         LOGGER.info("Updating products for cart with ID: {}", cartId);
         Cart cart = cartRepository.getCartById(cartId);
 
-        for (Product p : products) {
-            cartRepository.updateProduct(cartId, p);
+        for (ProductDto productDTO : products) {
+            ProductAvailable prodAvailable = productAvailableService.getProductCheckingTheStock(productDTO);
+            if (prodAvailable != null) {
+                Product product = new Product(prodAvailable.getId(),
+                                              prodAvailable.getDescription(),
+                                              productDTO.getAmount());
+                cartRepository.updateProduct(cartId, product);
+            }
         }
         return cartRepository.saveCart(cart);
     }
@@ -98,7 +112,6 @@ public class CartService {
 
     /**
      * Scheduled task that deletes inactive carts.
-     *
      * This method runs at a fixed rate (every 60 seconds) and removes all carts
      * that have been inactive for a period greater than the defined limit.
      */
