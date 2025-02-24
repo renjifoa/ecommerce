@@ -32,8 +32,8 @@ Run the following command in the project's root directory:
 ```sh
   mvn spring-boot:run
 ```
-The API will be available at: 
-`http://localhost:8080/cart`
+The API will be available at: ```http://localhost:8080/cart```
+
 ---
 
 ## API Usage
@@ -58,8 +58,8 @@ The API will be available at:
 ```sh
   mvn jacoco:report
 ```
-The report will be located at:
-`target/site/jacoco/index.html`
+The report will be located at: ```target/site/jacoco/index.html```
+
 ---
 ## API Documentation with Swagger
 The API includes Swagger documentation.
@@ -77,7 +77,7 @@ ecommerce
 ├── src/main/java/com/onebox/ecommerce
 │   ├── controller      # Handles HTTP requests
 │   ├── dto             # Data transfer objects for request/response
-│   ├── exception      # Custom exceptions and exception handling
+│   ├── exception       # Custom exceptions and exception handling
 │   ├── model           # Entities and data models
 │   ├── repository      # Data access layer
 │   ├── service         # Business logic
