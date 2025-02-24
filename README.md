@@ -58,7 +58,19 @@ In the directory ```docs/postman``` you can find the collection and environment 
 | GET    | `/products`  | Retrieve available products   | Empty                                           |
 
 Predefined products:
-Apple, Banana, Orange, Mango, Pineapple, Watermelon, Papaya, Peach, Kiwi, Avocado
+
+| ID  | Description | Stock |
+|-----|-------------|-------|
+| 1   | Apple       | 100   |
+| 2   | Banana      | 200   |
+| 3   | Cherry      | 300   |
+| 4   | Date        | 400   |
+| 5   | Grape       | 500   |
+| 6   | Kiwi        | 600   |
+| 7   | Lemon       | 700   |
+| 8   | Mango       | 800   |
+| 9   | Orange      | 900   |
+| 10  | Pear        | 1000  |
 
 ---
 ## Testing and Code Coverage
